@@ -11,7 +11,16 @@ const planeSample = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.Me
 planeSample.rotation.set(-Math.PI*0.5, 0, 0)
 planeSample.position.set(0, -2, 0)
 
-const base = [ambientLight, directionalLight]
-const floor = [planeSample]
+const basicSceneAdd=(scene)=>{
+  scene.add(ambientLight, directionalLight, planeSample)
+}
 
-export { base, floor }
+const addGui=(gui)=>{
+  const lightFolder = gui.addFolder('Light')
+  lightFolder.add(directionalLight, 'intensity').min(0).max(10).step(0.001).name(directionalLight.type)
+  lightFolder.add(directionalLight.position, 'x').min(- 5).max(5).step(0.001).name('lightX')
+  lightFolder.add(directionalLight.position, 'y').min(- 5).max(5).step(0.001).name('lightY')
+  lightFolder.add(directionalLight.position, 'z').min(- 5).max(5).step(0.001).name('lightZ')
+}
+
+export { basicSceneAdd, addGui }

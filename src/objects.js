@@ -5,5 +5,7 @@ const testSphere = new THREE.Mesh(
     new THREE.MeshStandardMaterial()
 ) 
 
-const geometry = [testSphere]
-export {geometry}
+const basicSceneAdd=(scene)=>{
+    scene.add(testSphere)
+}
+export { basicSceneAdd }

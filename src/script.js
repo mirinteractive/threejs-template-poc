@@ -44,52 +44,11 @@ function onWindowResize() {
     render()
 }
 
-
-const updateAllMaterials = () => {
-    scene.traverse((child) => {
-        if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial){
-            child.castShadow = true
-            child.receiveShadow = true
-        }
-    })
-}
-
-//이거로 애니메이션 poc 진행
-// const baseEnvironment = environment.base.filter(x => {
-//     scene.add(x)
-//     lightFolder.add(x, 'intensity').min(0).max(10).step(0.001).name(x.type)
-//     return x
-// })
 const gui = new dat.GUI()
-const lightFolder = gui.addFolder('Light')
-lightFolder.open()
-const tomeMappingFolder = gui.addFolder('Tone')
-tomeMappingFolder.open()
 
-tomeMappingFolder.add(renderer, 'toneMapping', {
-        No: THREE.NoToneMapping,
-        Linear: THREE.LinearToneMapping,
-        Reinhard: THREE.ReinhardToneMapping,
-        Cineon: THREE.CineonToneMapping,
-        ACESFilmic: THREE.ACESFilmicToneMapping
-    }).onFinishChange(() => {
-        renderer.toneMapping = Number(renderer.toneMapping)
-        updateAllMaterials()
-    })
-tomeMappingFolder.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
-environment.base.filter(x => {
-    scene.add(x)
-    lightFolder.add(x, 'intensity').min(0).max(10).step(0.001).name(x.type)
-    lightFolder.add(x.position, 'x').min(- 5).max(5).step(0.001).name('lightX')
-    lightFolder.add(x.position, 'y').min(- 5).max(5).step(0.001).name('lightY')
-    lightFolder.add(x.position, 'z').min(- 5).max(5).step(0.001).name('lightZ')
-    return x
-})
-environment.floor.map(x => {scene.add(x)})
-objects.geometry.map(x=>{
-    scene.add(x); 
-    updateAllMaterials();
-})
+environment.basicSceneAdd(scene)
+environment.addGui(gui)
+objects.basicSceneAdd(scene)
 
 function animate() {
     requestAnimationFrame(animate)
