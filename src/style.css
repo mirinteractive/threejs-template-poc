@@ -1,0 +1,38 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    z-index: 1;
+    /* background: #ff87cf; */
+}
+
+.position-base {
+    position: absolute;
+    z-index: 10;
+    /* opacity: 0.6; */
+}
+
+#position-mouse {
+    left: 0;
+    top: 40%;
+    margin-left: 25px;
+}
+
+#navigate-menu {
+    transform: scale(5);
+    transform-origin: top left;
+}
