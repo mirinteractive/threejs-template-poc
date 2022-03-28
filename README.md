@@ -4,7 +4,7 @@
 
 ## You will be able to..
 - create basic scene using orbit control
-- import 3d model (glsl||fbx)
+- import 3d model (gltf||fbx)
 - shader & glsl
 - ... and lots of other stuff
 
